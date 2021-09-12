@@ -52,18 +52,29 @@ namespace Sol2
         // Count number of reachable nodes from root
         public int CountReachableNodes(int maxMoves) {
             if (Debug) {
-                Console.WriteLine($"Graph->CountReachableNodes({maxMoves})");
+                Console.WriteLine($"Graph (Root Node {Root.Id})->CountReachableNodes({maxMoves})");
+
+                // Print all nodes
+                System.Console.Write("    Children are: ");
+                foreach (var child in Root.Neighbors) {
+                    System.Console.Write($"{child.Key.Id}, ");
+                }    
+                System.Console.WriteLine();
             }
             
             // Initialize
             int count = 1;
 
             // find nodes from each child in root
+            var parents = new Stack<Node>();
+            parents.Push(Root);
             foreach (var child in Root.Neighbors) {
-                if(Debug) System.Console.WriteLine($"Child ({child.Key.Id},{child.Value})");
-                count +=child.Key.CountReachableNodes(maxMoves, child.Value, Root);
+                if(Debug) System.Console.WriteLine($"    Child (Id:{child.Key.Id},Distance:{child.Value})\n\n");
+                var childCount = child.Key.CountReachableNodes(maxMoves, child.Value, parents );
+                if(Debug) System.Console.WriteLine($"    ChildCount: {childCount}\n");
+                count += childCount;
             }
-
+            if(Debug) System.Console.WriteLine($"Graph (Root Node {Root.Id})->CountReachableNodes({maxMoves}) --->    Count: {count}");
             return count; // TODO
         }
     }
@@ -95,26 +106,46 @@ namespace Sol2
         }
 
         // count nodes reachable from this node
-        public int CountReachableNodes(int maxMoves, int weight, Node parent = null) {
+        public int CountReachableNodes(int maxMoves, int weight, Stack<Node> parents) {
             if(Debug) {
-                Console.WriteLine($"(Id:{Id}) -> ReachableNodes(moves:{maxMoves}, weight:{weight})");
+                Console.WriteLine($"    (Id:{Id}) -> ReachableNodes(moves:{maxMoves}, weight:{weight})");
+
+                System.Console.Write("    Parents are: ");
+                foreach (var parent in parents) {
+                    System.Console.Write($"{parent.Id}, ");
+                }
+                System.Console.WriteLine();
+                 // Print all nodes
+                System.Console.Write("    Children are: ");
+                foreach (var child in Neighbors) {
+                    System.Console.Write($"{child.Key.Id}, ");
+                }    
+                System.Console.WriteLine();
             }
 
-            int count = weight < maxMoves ? weight  : maxMoves;
+            int count = 1 + (weight < maxMoves ? weight  : maxMoves);
             maxMoves -= count;
 
-            if(maxMoves <= 0) return count;
+            // if we have no more moves, return count
+            if(maxMoves <= 0) {
+                if(Debug) System.Console.WriteLine($"    (Id:{Id}) -> ReachableNodes: No more moves Count: {count}, maxMoves:{maxMoves}");
+                return count;
+                }
+
             // iterate over children
             foreach (var child in Neighbors) {
-                if(parent != null && child.Key == parent) {
-                    if(Debug) System.Console.WriteLine($"({Id}) -> Skip parent ({child.Key.Id},{child.Value})");
+                if(parents != null && parents.Contains(child.Key)) {
+                    if(Debug) System.Console.WriteLine($"({Id}) -> Skip parent ({child.Key.Id})");
                     continue;
                 }
                 
                 if(Debug) System.Console.WriteLine($"({Id}) -> Inspect Child (Id:{child.Key.Id},Distance:{child.Value})");
-                count += child.Key.CountReachableNodes(maxMoves, child.Value, this);
+                // if(!parents.Contains(this)) 
+                parents.Push(this);
+                count += child.Key.CountReachableNodes(maxMoves, child.Value, parents);
                 if(Debug) System.Console.WriteLine($"({Id}) -> Child (Id:{child.Key.Id},Distance:{child.Value}) count = {count}");
             }
+            parents.Pop();
             return count; 
         }
     }
