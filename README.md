@@ -16,3 +16,4 @@ I am somehow tempted to replace nodes in between with a scalar value representin
 
 ##### Journal 
 `14:47 PM` so far I passed test cases 1 though 13, but case 14 is giving a lower number than expected; 41 instead of 43.
+`15:09 PM` I decided to switch to weighted edge soltion, and placed it in Sol2 namespace.

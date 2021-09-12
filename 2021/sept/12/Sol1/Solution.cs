@@ -7,7 +7,7 @@ namespace Sol1
     {
         public int ReachableNodes(int[][] edges, int maxMoves, int n)
         {
-            var debug = false;
+            var debug = true;
             // Create graph nodes
             var graphNodes = new List<Node>();
             for (int idx = 0; idx < n; idx++)
@@ -59,20 +59,20 @@ namespace Sol1
             var node2 = graphNodes[edge[1]];
             var steps = edge[2];
 
-            if (Debug) Console.WriteLine($"Adding edge {node1.Id} -> {node2.Id} with {steps} steps");
+            if (Debug) Console.WriteLine($"Adding edge {node1.Id} <-> {node2.Id} with {steps} steps");
 
             for (int idx = 0; idx < steps; idx++)
             {
                 string id = $"{_globalCounter++}";
-                var middleNode = new Node(id);
+                var middleNode = new Node(id, Debug);
                 node1.AddNeighbor(middleNode);
                 middleNode.AddNeighbor(node1);
-                if (Debug) Console.WriteLine($"....link {node1.Id} <-> {middleNode.Id}");
+                if (Debug) Console.Write($"{node1.Id} <-> {middleNode.Id}, ");
                 node1 = middleNode;
             }
 
             // DEBUG
-            if (Debug) Console.WriteLine($"....final link {node1.Id} <-> {node2.Id}");
+            if (Debug) Console.WriteLine($"....final link {node1.Id} <-> {node2.Id}\n");
             node1.AddNeighbor(node2);
             node2.AddNeighbor(node1);
         }
@@ -81,7 +81,13 @@ namespace Sol1
         {
             // DEBUG
             if (Debug) System.Console.WriteLine($"Graph->GetReachableNodes({maxMoves})");
-            return root.GetReachableNodes(maxMoves);
+            int count = 1;
+            foreach(var neighbor in root.neighbors) {
+                if (Debug) System.Console.WriteLine($"Root neighbor {neighbor.Id}");
+                count += neighbor.GetReachableNodes(maxMoves - 1);
+            }
+            //return root.GetReachableNodes(maxMoves);
+            return count;
         }
 
         internal void PrintGraph()
@@ -97,7 +103,7 @@ namespace Sol1
     internal class Node
     {
         public string Id { get; set; }
-        private HashSet<Node> neighbors; // node neighbors
+        public HashSet<Node> neighbors; // node neighbors
         public bool Debug { get; set; }
         /// <summary>
         /// Constructor
@@ -139,11 +145,13 @@ namespace Sol1
 
         internal int CountDepthFirst(int maxMoves, HashSet<Node> visited = null)
         {
+
             if (visited == null)
             {
                 visited = new HashSet<Node>();
             }
             visited.Add(this);
+            
             // DEBUG
             if (Debug)
             {
@@ -169,7 +177,8 @@ namespace Sol1
                 }
                 return count;
             }
-            return 1;
+            //return 1;
+            return 0;
         }
 
         /// <summary>
