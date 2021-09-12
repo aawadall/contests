@@ -118,7 +118,7 @@ namespace Sol2
                 System.Console.WriteLine();
             }
 
-            int count = 1 + (weight < maxMoves ? weight  : maxMoves);
+            int count =  (weight < maxMoves ? weight  : 1 + maxMoves);
             maxMoves -= count;
             maxMoves = maxMoves < 0 ? 0 : maxMoves;
 
