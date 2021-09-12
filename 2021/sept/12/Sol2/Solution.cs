@@ -66,11 +66,12 @@ namespace Sol2
             int count = 1;
 
             // find nodes from each child in root
-            var parents = new Stack<Node>();
-            parents.Push(Root);
+            var visited = new HashSet<Node>();
+            visited.Add(Root);
+            
             foreach (var child in Root.Neighbors) {
                 if(Debug) System.Console.WriteLine($"    Child (Id:{child.Key.Id},Distance:{child.Value})\n\n");
-                var childCount = child.Key.CountReachableNodes(maxMoves, child.Value, parents );
+                var childCount = child.Key.CountReachableNodes(maxMoves, child.Value,  visited);
                 if(Debug) System.Console.WriteLine($"    ChildCount: {childCount}\n");
                 count += childCount;
             }
@@ -106,15 +107,9 @@ namespace Sol2
         }
 
         // count nodes reachable from this node
-        public int CountReachableNodes(int maxMoves, int weight, Stack<Node> parents) {
+        public int CountReachableNodes(int maxMoves, int weight, HashSet<Node> visited) {
             if(Debug) {
                 Console.WriteLine($"    (Id:{Id}) -> ReachableNodes(moves:{maxMoves}, weight:{weight})");
-
-                System.Console.Write("    Parents are: ");
-                foreach (var parent in parents) {
-                    System.Console.Write($"{parent.Id}, ");
-                }
-                System.Console.WriteLine();
                  // Print all nodes
                 System.Console.Write("    Children are: ");
                 foreach (var child in Neighbors) {
@@ -125,6 +120,7 @@ namespace Sol2
 
             int count = 1 + (weight < maxMoves ? weight  : maxMoves);
             maxMoves -= count;
+            maxMoves = maxMoves < 0 ? 0 : maxMoves;
 
             // if we have no more moves, return count
             if(maxMoves <= 0) {
@@ -134,18 +130,20 @@ namespace Sol2
 
             // iterate over children
             foreach (var child in Neighbors) {
-                if(parents != null && parents.Contains(child.Key)) {
-                    if(Debug) System.Console.WriteLine($"({Id}) -> Skip parent ({child.Key.Id})");
+                if(visited.Contains(child.Key)) {
+                    if(Debug) System.Console.WriteLine($"    (Id:{Id}) -> ReachableNodes: Already visited {child.Key.Id}");
                     continue;
                 }
+                visited.Add(child.Key);
+
+                
                 
                 if(Debug) System.Console.WriteLine($"({Id}) -> Inspect Child (Id:{child.Key.Id},Distance:{child.Value})");
-                // if(!parents.Contains(this)) 
-                parents.Push(this);
-                count += child.Key.CountReachableNodes(maxMoves, child.Value, parents);
+                
+                count += child.Key.CountReachableNodes(maxMoves, child.Value, visited);
                 if(Debug) System.Console.WriteLine($"({Id}) -> Child (Id:{child.Key.Id},Distance:{child.Value}) count = {count}");
             }
-            parents.Pop();
+            
             return count; 
         }
     }
