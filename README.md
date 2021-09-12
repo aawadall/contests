@@ -15,6 +15,7 @@ then given list of edges, I will create the relationships between nodes, inserti
 I am somehow tempted to replace nodes in between with a scalar value representing weight of edge.
 
 ##### Journal 
-`14:47 PM` so far I passed test cases 1 though 13, but case 14 is giving a lower number than expected; 41 instead of 43.
-`15:09 PM` I decided to switch to weighted edge soltion, and placed it in Sol2 namespace.
-`18:12 PM` Sol2 seem more elegant, I managed to fix case 14, but I broke 1 and 2.
+* `14:47` so far I passed test cases 1 though 13, but case 14 is giving a lower number than expected; 41 instead of 43.
+* `15:09` I decided to switch to weighted edge soltion, and placed it in Sol2 namespace.
+* `18:12` Sol2 seem more elegant, I managed to fix case 14, but I broke 1 and 2.
+* `18:29` I fixed 1 and 3, and broke the rest
