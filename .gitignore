@@ -1,0 +1,3 @@
+# Ignore .net core files
+**/bin
+**/obj
