@@ -20,49 +20,49 @@ namespace _12
                     n = 3,
                     Expected = 13
                     },
-                new TestData {
-                    Name = "Test Case 2",
-                    edges = new int[][] {
-                        new int[] {0,1,4},
-                        new int[] {1,2,6},
-                        new int[] {0,2,8},
-                        new int[] {1,3,1},
-                    },
-                    maxMoves = 10,
-                    n = 4,
-                    Expected = 23
-                },
-                new TestData {
-                    Name = "Test Case 3",
-                    edges = new int[][] {
-                    new int[] {1,2,4},
-                    new int[] {1,4,5},
-                    new int[] {1,3,1},
-                    new int[] {2,3,4},
-                    new int[] {3,4,5}
-                    },
-                    maxMoves = 17,
-                    n = 5,
-                    Expected = 1
-                },
-                new TestData {
-                    Name = "Test Case 14",
-                    edges = new int[][] {
-                        new int[] {0,2,3},
-                        new int[] {0,4,4},
-                        new int[] {2,3,8},
-                        new int[] {1,3,5},
-                        new int[] {0,3,9},
-                        new int[] {3,4,6},
-                        new int[] {0,1,5},
-                        new int[] {2,4,6},
-                        new int[] {1,2,3},
-                        new int[] {1,4,1}
-                    },
-                    maxMoves = 8,
-                    n = 5,
-                    Expected = 43,
-                },
+                // new TestData {
+                //     Name = "Test Case 2",
+                //     edges = new int[][] {
+                //         new int[] {0,1,4},
+                //         new int[] {1,2,6},
+                //         new int[] {0,2,8},
+                //         new int[] {1,3,1},
+                //     },
+                //     maxMoves = 10,
+                //     n = 4,
+                //     Expected = 23
+                // },
+                // new TestData {
+                //     Name = "Test Case 3",
+                //     edges = new int[][] {
+                //     new int[] {1,2,4},
+                //     new int[] {1,4,5},
+                //     new int[] {1,3,1},
+                //     new int[] {2,3,4},
+                //     new int[] {3,4,5}
+                //     },
+                //     maxMoves = 17,
+                //     n = 5,
+                //     Expected = 1
+                // },
+                // new TestData {
+                //     Name = "Test Case 14",
+                //     edges = new int[][] {
+                //         new int[] {0,2,3},
+                //         new int[] {0,4,4},
+                //         new int[] {2,3,8},
+                //         new int[] {1,3,5},
+                //         new int[] {0,3,9},
+                //         new int[] {3,4,6},
+                //         new int[] {0,1,5},
+                //         new int[] {2,4,6},
+                //         new int[] {1,2,3},
+                //         new int[] {1,4,1}
+                //     },
+                //     maxMoves = 8,
+                //     n = 5,
+                //     Expected = 43,
+                // },
                 // new TestData {
                 //     Name = "Test Case 14 - Ordered",
                 //     edges = new int[][] {

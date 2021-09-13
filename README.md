@@ -19,3 +19,6 @@ I am somehow tempted to replace nodes in between with a scalar value representin
 * `15:09` I decided to switch to weighted edge soltion, and placed it in Sol2 namespace.
 * `18:12` Sol2 seem more elegant, I managed to fix case 14, but I broke 1 and 2.
 * `18:29` I fixed 1 and 3, and broke the rest
+* `21:00` I gave up. will work on tomorrow's problem.
+
+#### September 13
