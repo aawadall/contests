@@ -22,3 +22,4 @@ I am somehow tempted to replace nodes in between with a scalar value representin
 * `21:00` I gave up. will work on tomorrow's problem.
 
 #### September 13
+problem was super easy, done in first attempt 
