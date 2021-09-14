@@ -39,3 +39,9 @@ solution passed all test cases
 
 ## Reflection 
 In addition to helping me to understand how to use data structures and algorithms, these problems also gave me a good reason to follow _Test Driven Development_ approach.
+
+# [Problems](https://leetcode.com/problemset/all) 
+I also started working on general problems from leetcode in folder `problems` and each problem has its own folder.
+I will try to be as patient as possible, and try to solve each problem no matter how easy it is.
+
+## [1 - Two Sum](https://leetcode.com/problems/two-sum/)
