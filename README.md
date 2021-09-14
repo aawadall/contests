@@ -36,3 +36,6 @@ approach:
 * otherwise, append the character `c` to the result string `result`
 
 solution passed all test cases
+
+## Reflection 
+In addition to helping me to understand how to use data structures and algorithms, these problems also gave me a good reason to follow _Test Driven Development_ approach.
