@@ -1,6 +1,6 @@
 using NUnit.Framework;
 using System.Collections.Generic;
-using Sol1;
+using Sol2;
 namespace sept_13
 {
     public class Tests

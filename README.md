@@ -23,3 +23,16 @@ I am somehow tempted to replace nodes in between with a scalar value representin
 
 #### September 13
 problem was super easy, done in first attempt 
+
+#### September 14
+Reverse only letters
+approach:
+* define a stack of characters `stack`
+* iterate through the input string `s` reading characters `c`
+* if the character `c` is a letter, push it to the stack `stack`
+* define an emtpy string `result`
+* iterate once again through the input string `s` reading characters `c`
+* if the character `c` read from input string `s` is a letter, pop it from the stack `stack` into the result string `result`
+* otherwise, append the character `c` to the result string `result`
+
+solution passed all test cases
