@@ -29,10 +29,10 @@ namespace Sol1
             {
                 if (diff[i] != diff[i - 1] && diff[i] != 0) {
                     counter++;
-                    max = Math.Max(max, counter + 1);
+                    max = Math.Max(max, counter );
                 } else
                 {
-                    counter = 1;
+                    counter = diff[i] == 0 ? 1 : 2;
                 }
             }
             max = Math.Max(max, counter);
