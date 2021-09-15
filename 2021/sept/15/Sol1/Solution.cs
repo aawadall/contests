@@ -8,35 +8,65 @@ namespace Sol1
         public bool EnableDebug { get; set; }
         public int MaxTurbulenceSize(int[] arr) {
             // naive solution
-            int max = 1;
-            int counter = 1;
-            var diff = new int[arr.Length -1];
-            if (EnableDebug) Debug.WriteLine($"array length={arr.Length}");
-            // special case, single element
+            int max = 0, 
+                counter = 0;
+            int previousComparison;
+            // for each element in the array, compare to next element
+            // compare current comparison to previous comparison
+            // if current > next, and previous comparison is less than, advance counter by 1 
+            // if current < next, and previous comparison is greater than, advance counter by 1
+            // else reset counter as follows
+            // if current = next, reset counter to 1, else reset to 2
+            // before reset, compare max to counter and update if required 
+
+            // special case 
             if (arr.Length == 1) return 1;
 
-            // iterate through the array and ensure comparison is alternating, otherwise reset max
-            for (int i = 0; i < arr.Length - 1; i++)
-            {
-                diff[i ] = (arr[i] > arr[i + 1]) ? 1 :
-                              (arr[i] < arr[i + 1]) ? -1 : 0;
-                if (EnableDebug) Debug.WriteLine($"idx:[{i}],\tarr[{i}] = {arr[i]},\tarr[{i+1}]={arr[i+1]},\tdiff={diff[i]}");
-            
-            }
+            // first comparison 
+            counter = 2; // assuming different elements
 
-            // iterate through diff and find max
-            for (int i = 1; i < diff.Length; i++)
-            {
-                if (diff[i] != diff[i - 1] && diff[i] != 0) {
+            if (arr[0] > arr[1]) { 
+                previousComparison = 1;
+            } else if (arr[0] < arr[1]) {
+                previousComparison = -1;
+            } else {
+                if (EnableDebug) Debug.WriteLine("Special case, equal elements");
+                previousComparison = 0;
+                counter = 1; // fallback to 1
+            }
+            
+            max = counter;
+            // iterate through the array
+            for (int i = 1; i < arr.Length - 1; i++) {
+                // get current comparison 
+                int currentComparison = arr[i] > arr[i + 1] ? 1 : arr[i] < arr[i + 1] ? -1 : 0;
+                
+                // if current comparison is not 0 and different from previous comparison, increment counter
+                if (currentComparison != 0 && currentComparison != previousComparison) {
+                    if (EnableDebug) Debug.WriteLine($"Incrementing counter {counter} -> {counter+1}");
                     counter++;
-                    max = Math.Max(max, counter );
-                } else
-                {
-                    counter = diff[i] == 0 ? 1 : 2;
+                    previousComparison = currentComparison;
+                    max = Math.Max(max, counter);
+                } else {
+                    // if current comparison is 0, reset counter to 1
+                    if (currentComparison == 0) {
+                        if(EnableDebug) Console.WriteLine("Resetting counter to 1");
+                        max = Math.Max(max, counter);
+                        counter = 1;
+                    } else {
+                        // if current comparison is same as previous comparison, reset counter to 2
+                        if (EnableDebug) Console.WriteLine("Resetting counter to 2");
+                        previousComparison = currentComparison;
+                        max = Math.Max(max, counter);
+                        counter = 2;
+                    }
                 }
             }
-            max = Math.Max(max, counter);
+            // return max counter 
             return max;
-        }    
+        }  
+
     }
+
+
 }

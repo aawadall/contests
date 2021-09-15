@@ -54,6 +54,8 @@ namespace _15
             new object[] {"Test Example 2", new int[] {4, 8, 12, 16}, 2},
             new object[] {"Test Example 3", new int[] {100}, 1},
             new object[] {"Test case 84", new int[] {9, 9}, 1},
+            new object[] {"Test case 83", new int[] {37,199,60,296,257,248,115,31,273,176}, 5},
+            new object[] {"Test case 84b", new int[] {0,8,45,88,48,68,28,55,17,24}, 8},
         };
     }
 }
