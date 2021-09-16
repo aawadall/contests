@@ -21,7 +21,7 @@ namespace _15
             System.Console.WriteLine(testCaseName);
             Profile(solution.MaxTurbulenceSize, arr, out actual, out duration);
             Assert.AreEqual(expected, actual, testCaseName);
-            Assert.Less(duration, _maxDuration);     
+            Assert.True(duration < _maxDuration, $"{testCaseName} took too long; {duration} ms");
         }
 
         private void Profile(SolDelegate solutionMethod, int[] arr, out int actual, out long duration) {
@@ -41,7 +41,7 @@ namespace _15
 
         private delegate int SolDelegate(int[] arr);
 
-        private static int _maxDuration = 100;
+        private static int _maxDuration = 1;
         /// <summary>
         /// Test cases with the following catalog
         /// - string: Test Case Name
