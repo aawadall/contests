@@ -47,5 +47,3 @@ In addition to helping me to understand how to use data structures and algorithm
 # [Problems](https://leetcode.com/problemset/all) 
 I also started working on general problems from leetcode in folder `problems` and each problem has its own folder.
 I will try to be as patient as possible, and try to solve each problem no matter how easy it is.
-
-## [1 - Two Sum](https://leetcode.com/problems/two-sum/)
