@@ -12,7 +12,7 @@ namespace sep19
         [SetUp]
         public void Setup()
         {
-            _solution = new Solution3();
+            _solution = new Solution4();
             // log level 
             _solution.EnableDebug = false;
             Trace.Listeners.Add(new ConsoleTraceListener());
