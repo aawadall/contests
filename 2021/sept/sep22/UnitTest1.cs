@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using NUnit.Framework;
 
 namespace sep22
@@ -29,9 +30,9 @@ namespace sep22
 
         private static object[] _examples = new object[]
         {
+            new object[] { new string[] { "abcdefghijklmnopqrstuvwxyz" }, 26 },
             new object[] { new string[] { "un", "iq", "ue" }, 4 },
             new object[] { new string[] { "cha", "r", "act", "ers" }, 6 },
-            new object[] { new string[] { "abcdefghijklmnopqrstuvwxyz" }, 26 },
         };
 
         /* Test Cases
@@ -42,19 +43,23 @@ namespace sep22
         private static object[] _testCases = new object[]
         {
             new object[] { new string[] { "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p" }, 16 },
+            new object[] { new string[] { "ab","ba","cd","dc","ef","fe","gh","hg","ij","ji","kl","lk","mn","nm","op","po"}, 16 },
+            new object[] { new string[] { "yy","bkhwmpbiisbldzknpm" }, 0 },
+            new object[] { new string[] { "zog","nvwsuikgndmfexxgjtkb","nxko" }, 4 },
         };
 
         #endregion
         [SetUp]
         public void Setup()
         {
+            Trace.Listeners.Add(new ConsoleTraceListener());
         }
 
         [Test]
         [TestCaseSource(nameof(_examples))]
         public void Examples(string[] arr, int expected)
         {
-            var sol = new Solution2();
+            var sol = new Solution3();
 
             var actual = profile<int>(() => sol.MaxLength(arr));
 
@@ -65,7 +70,7 @@ namespace sep22
         [TestCaseSource(nameof(_testCases))]
         public void TestCases(string[] arr, int expected)
         {
-            var sol = new Solution2();
+            var sol = new Solution3();
 
             var actual = profile<int>(() => sol.MaxLength(arr));
 
