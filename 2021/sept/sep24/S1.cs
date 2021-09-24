@@ -12,13 +12,13 @@ namespace sep24
                 {1, 1},
                 {2, 1},
             };
-            return Tribonacci(n, cache);
+            return Tribonacci(n, ref cache);
         }
 
-        private int Tribonacci(int n, Dictionary<int, int> cache)
+        private int Tribonacci(int n, ref Dictionary<int, int> cache)
         {
             if (cache.ContainsKey(n)) return cache[n];
-            var result = Tribonacci(n - 1, cache) + Tribonacci(n - 2, cache) + Tribonacci(n - 3, cache);
+            var result = Tribonacci(n - 1, ref cache) + Tribonacci(n - 2, ref cache) + Tribonacci(n - 3, ref cache);
             cache[n] = result;
             return result;
         }
