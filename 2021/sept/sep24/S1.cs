@@ -18,7 +18,9 @@ namespace sep24
         private int Tribonacci(int n, ref Dictionary<int, int> cache)
         {
             if (cache.ContainsKey(n)) return cache[n];
-            var result = Tribonacci(n - 1, ref cache) + Tribonacci(n - 2, ref cache) + Tribonacci(n - 3, ref cache);
+            var result = 0;
+            for (int idx = 1; idx <= 3; idx++)
+                result += Tribonacci(n - idx, ref cache);
             cache[n] = result;
             return result;
         }
